@@ -4,6 +4,7 @@
 * Created: 07.09.2018 23:47:13
 * Author: koval
 */
+#include <Arduino.h>
 #include "ICoolerMotor.h"
 
 #ifndef __LINARCOOLERMOTOR_H__

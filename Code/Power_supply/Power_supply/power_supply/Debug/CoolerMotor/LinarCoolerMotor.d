@@ -1,6 +1,6 @@
 CoolerMotor/LinarCoolerMotor.d CoolerMotor/LinarCoolerMotor.o: \
  ../CoolerMotor/LinarCoolerMotor.cpp ../CoolerMotor/LinarCoolerMotor.h \
- ../include/ICoolerMotor.h ..\\..\ArduinoCore\include\core/Arduino.h \
+ ..\\..\ArduinoCore\include\core/Arduino.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
@@ -35,11 +35,10 @@ CoolerMotor/LinarCoolerMotor.d CoolerMotor/LinarCoolerMotor.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  ..\\..\ArduinoCore\include\core/Arduino.h \
  ..\\..\ArduinoCore\include\variants\eightanaloginputs/pins_arduino.h \
- ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h
+ ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h \
+ ../include/ICoolerMotor.h
 
 ../CoolerMotor/LinarCoolerMotor.h:
-
-../include/ICoolerMotor.h:
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -112,3 +111,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ..\\..\ArduinoCore\include\variants\eightanaloginputs/pins_arduino.h:
 
 ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h:
+
+../include/ICoolerMotor.h:

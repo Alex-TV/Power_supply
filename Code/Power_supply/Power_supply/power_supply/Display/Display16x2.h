@@ -4,10 +4,12 @@
 * Created: 04.09.2018 12:33:45
 * Author: koval
 */
-
+#include <Arduino.h>
 #include <WString.h>
 #include <ModeEnum.h>
 #include <IDisplay.h>
+#include <LiquidCrystal_I2C.h>
+
 #ifndef __DISPLAY16X2_H__
 #define __DISPLAY16X2_H__
 
@@ -18,7 +20,7 @@ class Display16x2 : public IDisplay
 	public:
 	protected:
 	private:
-
+	LiquidCrystal_I2C*  _lcd;
 	//functions
 	public:
 	Display16x2();

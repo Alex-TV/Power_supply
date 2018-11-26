@@ -7,14 +7,11 @@
 #include "PowerMode.h"
 
 // default constructor
-PowerMode::PowerMode()
-{
-} //PowerMode
 PowerMode::PowerMode(IMode* voltageMode, IMode* amperagedMode, IDisplay* display)
 {
-	this->display = display;
-	this->amperagedMode = amperagedMode;
-	this->voltageMode = voltageMode;
+	_display = display;
+	_amperagedMode = amperagedMode;
+	_voltageMode = voltageMode;
 }
 
 // default destructor
@@ -30,7 +27,7 @@ ModeEnum PowerMode::GetTypeMode(){
 void PowerMode::SaveEEPROM(){}
 void PowerMode::ReadEEPROM(){}
 void PowerMode::PrintState(){
-	this->display->PowerPrint(voltageMode->GetValue() * amperagedMode->GetValue());
+	_display->PowerPrint(_voltageMode->GetValue() * _amperagedMode->GetValue());
 }
 void PowerMode::ReadADC(){}
 void PowerMode::WritePWM(){}

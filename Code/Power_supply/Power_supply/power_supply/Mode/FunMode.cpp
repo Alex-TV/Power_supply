@@ -5,16 +5,13 @@
 * Author: koval
 */
 #include "FunMode.h"
-#include "..\CoolerMotor\LinarCoolerMotor.h"
 
 // default constructor
-FunMode::FunMode(){} //FunMode
-
 FunMode::FunMode(IDisplay* display, int* temp)
 {
-	this->display = display;
-	this->funMotor =  new LinarCoolerMotor(CoolerMotorPin);
-	this->temp = temp;
+	_display = display;
+	_funMotor =  new LinarCoolerMotor(CoolerMotorPin);
+	_temp = temp;
 } //FunMode
 
 // default destructor
@@ -34,18 +31,18 @@ void FunMode::SaveEEPROM(){}
 void FunMode::ReadEEPROM(){}
 
 void FunMode::PrintState(){
-	display->Clear();
+	_display->Clear();
 }
 
 void FunMode::ReadADC(){}
 
 void FunMode::WritePWM(){
-	funMotor->Update(*temp);
+	_funMotor->Update(*_temp);
 }
 
 void FunMode::PrintMode(){
-	display->PrintTempAndFunStatus(*temp, funMotor->GetPowerProcent());
-	display->PrintProgressBar(1, funMotor->GetPowerProcent());
+	_display->PrintTempAndFunStatus(*_temp, _funMotor->GetPowerProcent());
+	_display->PrintProgressBar(1, _funMotor->GetPowerProcent());
 }
 void FunMode::SavePWMInEeprom(ButtonEnum){}
 void FunMode::ReadPWMInEeprom(ButtonEnum){}

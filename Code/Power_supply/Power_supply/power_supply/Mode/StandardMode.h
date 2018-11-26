@@ -20,7 +20,6 @@ class StandardMode : public IMode
 
 	//functions
 	public:
-	StandardMode();
 	StandardMode(IDisplay*);
 	~StandardMode();
 	void IncrementEncoderValue();

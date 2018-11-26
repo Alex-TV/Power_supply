@@ -5,23 +5,16 @@
 * Author: koval
 */
 #include "SetVoltageMode.h"
-#include "ModeEnum.h"
-#include "Arduino.h"
-#include "EEPROM.h"
 
 // default constructor
-SetVoltageMode::SetVoltageMode()
-{
-} //SetVoltage
-
 SetVoltageMode::SetVoltageMode(int pwmWritePin, int readValuePin, IDisplay* display)
 {
-	this->pwmWritePin = pwmWritePin;
-	this->readValuePin = readValuePin;
-	this->display = display;
+	_pwmWritePin = pwmWritePin;
+	_readValuePin = readValuePin;
+	_display = display;
 	//pwmValue =100;
-	pinMode(readValuePin, INPUT);
-	pinMode(pwmWritePin, OUTPUT);
+	pinMode(_readValuePin, INPUT);
+	pinMode(_pwmWritePin, OUTPUT);
 } //SetAmperagedMode
 // default destructor
 SetVoltageMode::~SetVoltageMode()
@@ -30,14 +23,14 @@ SetVoltageMode::~SetVoltageMode()
 
 void SetVoltageMode:: IncrementEncoderValue()
 {
-	if(pwmValue >= 254) return;
-	pwmValue++;
+	if(_pwmValue >= 254) return;
+	_pwmValue++;
 }
 
 void SetVoltageMode:: DecrementEncoderValue()
 {
-	if(pwmValue <= 0) return;
-	pwmValue--;
+	if(_pwmValue <= 0) return;
+	_pwmValue--;
 }
 
 ModeEnum SetVoltageMode:: GetTypeMode()
@@ -47,32 +40,32 @@ ModeEnum SetVoltageMode:: GetTypeMode()
 
 void SetVoltageMode::SaveEEPROM()
 {
-	EEPROM.update(memoryPWMAdress,  (uint8_t)pwmValue);
+	EEPROM.update(memoryPWMAdress,  (uint8_t)_pwmValue);
 	delay(4*64);
 }
 
 void SetVoltageMode::ReadEEPROM()
 {
-	pwmValue =EEPROM.read(memoryPWMAdress);
+	_pwmValue =EEPROM.read(memoryPWMAdress);
 }
 
 void SetVoltageMode::PrintState(){
-	this->display->VoltagesPrint(pwmValue, currentValue);
+	_display->VoltagesPrint(_pwmValue, _currentValue);
 }
 
 void SetVoltageMode::PrintMode()
 {
-	this->display->ModePrint(ModeEnum::SetVoltage);
+	_display->ModePrint(ModeEnum::SetVoltage);
 }
 
 void SetVoltageMode::ReadADC()
 {
-	currentValue = ReadMedian(readValuePin,5) * voltagesOneCount;
+	_currentValue = ReadMedian(_readValuePin,5) * voltagesOneCount;
 }
 
 void SetVoltageMode::WritePWM()
 {
-	analogWrite(pwmWritePin, pwmValue);
+	analogWrite(_pwmWritePin, _pwmValue);
 }
 
 void SetVoltageMode::SavePWMInEeprom(ButtonEnum button)
@@ -95,9 +88,9 @@ void SetVoltageMode::SavePWMInEeprom(ButtonEnum button)
 		numForPrint = 3;
 	}
 	if(memAdress == -1) return;
-	EEPROM.update(memoryPWMAdress1, (uint8_t)pwmValue);
-	this->display->MemorySavePrint(numForPrint);
-	delay(this->logoSavePWMVoltageInEepromTime);
+	EEPROM.update(memoryPWMAdress1, (uint8_t)_pwmValue);
+	_display->MemorySavePrint(numForPrint);
+	delay(this->_logoSavePWMVoltageInEepromTime);
 }
 
 void SetVoltageMode::ReadPWMInEeprom(ButtonEnum button)
@@ -122,9 +115,9 @@ void SetVoltageMode::ReadPWMInEeprom(ButtonEnum button)
 	}
 	if(memAdress == -1) return;
 	int readValue = EEPROM.read(memAdress);
-	if(pwmValue == readValue) return;
-	this->display->MemoryReadPrint(numForPrint);
-	delay(this->logoReadPWMVoltageInEepromTime);
+	if(_pwmValue == readValue) return;
+	_display->MemoryReadPrint(numForPrint);
+	delay(_logoReadPWMVoltageInEepromTime);
 }
 
 

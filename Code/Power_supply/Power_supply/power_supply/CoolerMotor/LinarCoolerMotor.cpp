@@ -4,10 +4,7 @@
 * Created: 07.09.2018 23:47:13
 * Author: koval
 */
-
-
 #include "LinarCoolerMotor.h"
-#include "Arduino.h"
 
 // default constructor
 LinarCoolerMotor::LinarCoolerMotor()

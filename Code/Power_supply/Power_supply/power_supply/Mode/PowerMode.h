@@ -1,7 +1,7 @@
 #include "ButtonEnum.h"
 #include "ModeEnum.h"
 #include "IMode.h"
-/* 
+/*
 * PowerMode.h
 *
 * Created: 18.10.2018 17:32:31
@@ -15,14 +15,14 @@
 
 class PowerMode :  public IMode
 {
-//variables
-public:
-protected:
-private:
-IMode* voltageMode;
-IMode* amperagedMode;
-//functions
-public:
+	//variables
+	public:
+	protected:
+	private:
+	IMode* _voltageMode;
+	IMode* _amperagedMode;
+	//functions
+	public:
 	void IncrementEncoderValue();
 	void DecrementEncoderValue();
 	ModeEnum GetTypeMode();
@@ -34,11 +34,10 @@ public:
 	void PrintMode();
 	void SavePWMInEeprom(ButtonEnum);
 	void ReadPWMInEeprom(ButtonEnum);
-	PowerMode();
 	PowerMode (IMode*, IMode*, IDisplay*);
 	~PowerMode();
-protected:
-private:
+	protected:
+	private:
 	PowerMode( const PowerMode &c );
 	PowerMode& operator=( const PowerMode &c );
 

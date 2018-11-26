@@ -10,13 +10,9 @@
 #include "ModeEnum.h"
 
 // default constructor
-StandardMode::StandardMode()
-{
-} //StandardMode
-
 StandardMode::StandardMode(IDisplay* display)
 {
-	this->display =display;
+	_display =display;
 } //StandardMode
 
 // default destructor
@@ -30,7 +26,7 @@ ModeEnum StandardMode:: GetTypeMode()
 }
 void StandardMode::PrintMode()
 {
-	this->display->ModePrint(GetTypeMode());
+	_display->ModePrint(GetTypeMode());
 }
 
 void StandardMode:: IncrementEncoderValue(){}

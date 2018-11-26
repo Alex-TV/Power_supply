@@ -4,6 +4,15 @@
 * Created: 08.09.2018 0:37:26
 * Author: koval
 */
+#define maxVoltagesValue  21
+#define voltagesOneCount  maxVoltagesValue/ADCCounts
+#define memoryPWMAdress 1
+#define memoryPWMAdress1 2
+#define memoryPWMAdress2 3
+#define memoryPWMAdress3 4
+
+#include <Arduino.h>
+#include <EEPROM.h>
 #include "IMode.h"
 #include "ModeEnum.h"
 #include "ButtonEnum.h"
@@ -18,16 +27,8 @@ class SetVoltageMode : public IMode
 	public:
 	protected:
 	private:
-	const float maxVoltagesValue = 21;
-	const float voltagesOneCount = maxVoltagesValue/ADCCounts;		
-	
-	const int memoryPWMAdress =1;
-	const int memoryPWMAdress1 =2;
-	const int memoryPWMAdress2 =3;
-	const int memoryPWMAdress3 =4;
 	//functions
 	public:
-	SetVoltageMode();
 	SetVoltageMode(int, int, IDisplay*);
 	~SetVoltageMode();
 	void IncrementEncoderValue();

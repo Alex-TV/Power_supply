@@ -21,7 +21,6 @@ class OFFMode : public IMode
 
 	//functions
 	public:
-	OFFMode();	  
 	OFFMode(IDisplay*);
 	~OFFMode();
 	void IncrementEncoderValue();

@@ -4,6 +4,12 @@
 * Created: 08.09.2018 0:52:05
 * Author: koval
 */
+#define maxAmperagedValue 11
+#define memoryPWMAdress 0
+#define amperagedOneCount maxAmperagedValue/ADCCounts
+
+#include <Arduino.h>
+#include <EEPROM.h>
 #include "IMode.h"
 #include "ModeEnum.h"
 
@@ -17,15 +23,12 @@ class SetAmperagedMode: public IMode
 	public:
 	protected:
 	private:
-	float backupValue=-1;
-	float backupReadPin =-1;
-	const float maxAmperagedValue = 11;
-	const float amperagedOneCount = maxAmperagedValue/ADCCounts;
-	const int memoryPWMAdress =0;
-	int stabAmperageLedPin=-1;
+	float _backupValue=-1;
+	float _backupReadPin =-1;
+	int _stabAmperageLedPin=-1;
+
 	//functions
 	public:
-	SetAmperagedMode();
 	SetAmperagedMode(int,int,int,int, IDisplay*);
 	~SetAmperagedMode();
 	void IncrementEncoderValue();

@@ -7,13 +7,11 @@
 
 
 #include "OFFMode.h"
-#include "ModeEnum.h"
 
 // default constructor
-OFFMode::OFFMode(){} //OFFMode
 OFFMode::OFFMode(IDisplay* display)
 {
-	this->display = display;
+	_display = display;
 } //OFFMode
 // default destructor
 OFFMode::~OFFMode(){} //~OFFMode
@@ -34,5 +32,5 @@ ModeEnum OFFMode::GetTypeMode()
 
 void OFFMode::PrintState()
 {
-	this->display->OffPrint();
+	_display->OffPrint();
 }

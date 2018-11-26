@@ -1,22 +1,25 @@
-/* 
+/*
 * IMode.h
 *
 * Created: 08.09.2018 0:22:37
 * Author: koval
 */
- #include "ModeEnum.h"
- #include "Arduino.h"
- #include "IDisplay.h"
- #include "ButtonEnum.h"
- 
+
+#define ADCCounts  1024
+
+#include "ModeEnum.h"
+#include "Arduino.h"
+#include "IDisplay.h"
+#include "ButtonEnum.h"
+
 #ifndef __IMODE_H__
 #define __IMODE_H__
 
 
 class IMode
 {
-//functions
-public:
+	//functions
+	public:
 	virtual ~IMode(){}
 	virtual void IncrementEncoderValue() = 0;
 	virtual void DecrementEncoderValue() = 0;
@@ -31,20 +34,18 @@ public:
 	virtual void ReadPWMInEeprom(ButtonEnum)=0;
 	float GetValue()
 	{
-		return currentValue;
-	} 
+		return _currentValue;
+	}
 	
-protected:
-	int memoryAdress =-1;
-    int pwmValue =0;
-	int pwmWritePin =-1;
-	float currentValue =-1;
-	int readValuePin =-1;
-	int const ADCCounts = 1024;
-    unsigned int const logoReadPWMVoltageInEepromTime = 3*64000;// врем€ показа надписи востановлени€ PWM из пам€ти.
-	unsigned int const logoSavePWMVoltageInEepromTime = 3*64000;// врем€ показа надписи записи PWM в пам€ти.
-
-	IDisplay *display;
+	protected:
+	int _memoryAdress =-1;
+	int _pwmValue =0;
+	int _pwmWritePin =-1;
+	float _currentValue =-1;
+	int _readValuePin =-1;
+    unsigned int const _logoReadPWMVoltageInEepromTime = 3*64000;// врем€ показа надписи востановлени€ PWM из пам€ти.
+    unsigned int const _logoSavePWMVoltageInEepromTime = 3*64000;// врем€ показа надписи записи PWM в пам€ти.
+	IDisplay* _display;
 	
 	int ReadMedian (int pin, int samples){
 		// массив дл€ хранени€ данных
@@ -68,7 +69,6 @@ protected:
 		// возвращаем значение средней €чейки массива
 		return raw[samples/2];
 	}
-
 }; //IMode
 
 #endif //__IMODE_H__

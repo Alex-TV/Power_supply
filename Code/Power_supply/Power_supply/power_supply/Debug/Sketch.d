@@ -49,7 +49,8 @@ Sketch.d Sketch.o: .././Sketch.cpp \
  ../include/ButtonEnum.h .././Mode/StandardMode.h \
  .././Mode/SetVoltageMode.h .././Mode/UnknownMode.h .././Mode/OFFMode.h \
  .././Mode/SetAmperagedMode.h .././Mode/FunMode.h \
- ../include/ICoolerMotor.h .././Mode/PowerMode.h
+ ../include/ICoolerMotor.h .././Mode/..\CoolerMotor\LinarCoolerMotor.h \
+ .././Mode/PowerMode.h
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -170,5 +171,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././Mode/FunMode.h:
 
 ../include/ICoolerMotor.h:
+
+.././Mode/..\CoolerMotor\LinarCoolerMotor.h:
 
 .././Mode/PowerMode.h:

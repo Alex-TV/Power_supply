@@ -8,6 +8,7 @@
 #include "ModeEnum.h"
 #include "ButtonEnum.h"
 #include "ICoolerMotor.h"
+#include "..\CoolerMotor\LinarCoolerMotor.h"
 
 #ifndef __FUNMODE_H__
 #define __FUNMODE_H__
@@ -20,11 +21,10 @@ class FunMode: public IMode
 	public:
 	protected:
 	private:
-	ICoolerMotor *funMotor;
-	int *temp;
+	ICoolerMotor* _funMotor;
+	int* _temp;
 	//functions
 	public:
-	FunMode();
 	FunMode(IDisplay*, int*);
 	~FunMode();
 	void IncrementEncoderValue();

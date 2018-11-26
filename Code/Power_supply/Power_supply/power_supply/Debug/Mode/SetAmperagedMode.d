@@ -1,6 +1,5 @@
 Mode/SetAmperagedMode.d Mode/SetAmperagedMode.o: \
  ../Mode/SetAmperagedMode.cpp ../Mode/SetAmperagedMode.h \
- ../include/IMode.h ../include/ModeEnum.h \
  ..\\..\ArduinoCore\include\core/Arduino.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
@@ -37,15 +36,12 @@ Mode/SetAmperagedMode.d Mode/SetAmperagedMode.o: \
  ..\\..\ArduinoCore\include\core/Arduino.h \
  ..\\..\ArduinoCore\include\variants\eightanaloginputs/pins_arduino.h \
  ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h \
- ../include/IDisplay.h ..\\..\ArduinoCore\include\core/Print.h \
- ../include/ButtonEnum.h ../include/ModeEnum.h \
- ..\include\libraries\EEPROM\src/EEPROM.h
+ ..\include\libraries\EEPROM\src/EEPROM.h ../include/IMode.h \
+ ../include/ModeEnum.h ../include/IDisplay.h \
+ ..\\..\ArduinoCore\include\core/Print.h ../include/ButtonEnum.h \
+ ../include/ModeEnum.h
 
 ../Mode/SetAmperagedMode.h:
-
-../include/IMode.h:
-
-../include/ModeEnum.h:
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -119,6 +115,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h:
 
+..\include\libraries\EEPROM\src/EEPROM.h:
+
+../include/IMode.h:
+
+../include/ModeEnum.h:
+
 ../include/IDisplay.h:
 
 ..\\..\ArduinoCore\include\core/Print.h:
@@ -126,5 +128,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../include/ButtonEnum.h:
 
 ../include/ModeEnum.h:
-
-..\include\libraries\EEPROM\src/EEPROM.h:

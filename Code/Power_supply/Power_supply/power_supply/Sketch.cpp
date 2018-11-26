@@ -46,6 +46,15 @@ Author:     GML-AKOVALEV\koval
 
 #define TemperaturePin 12
 
+#define modesCount 5
+#define maxTemperature 80
+#define buttonCount 5
+#define logoTime  2*64000 //время показа стартового лого
+#define selectModeResetTime 3*64000 //через сколько сборосится режим редактирования PWM.
+#define buttonSavePWMVoltageInEepromTime 3*64000 //время удержания кнопки памяти до сохраниения PWM.
+#define timeUpdateTemperature .5*64000 // период проверки максимальной температуры.
+#define timeRegEncoderButton .5*64000 // премя ожидания следуюцего нажатия кнопки энкодера.
+
 #pragma region
 //Beginning of Auto generated function prototypes by Atmel Studio
 void InitDisplay();
@@ -71,61 +80,49 @@ void CheckMaxTemperature();
 //End of Auto generated function prototypes by Atmel Studio
 #pragma endregion
 
-const char* strVer ="ver 1.0";
+const char* _strVer ="ver 1.0";
 
-SimpleTimer timerSelectModeReset; // таймер сброса режима редактирования
-SimpleTimer timerPressButtonTime;// таймер удержания кнопки для записи в EEPROM
-SimpleTimer timerUpdateTemperature;// таймер удержания кнопки для записи в EEPROM
-SimpleTimer timerRegEncoderButton;
-int timerSelectModeResetId;//id таймера сброса режима.
-int timerPressButtonTimeId;//id таймера удержания кнопки для записи в EEPROM.
-int timerUpdateTemperatureId;
-int timerRegEncoderButtonId;
+SimpleTimer* _timer; // таймер сброса режима редактирования
+SimpleTimer* _timerPressButtonTime;// таймер удержания кнопки для записи в EEPROM
+int _timerSelectModeResetId;//id таймера сброса режима.
+int _timerPressButtonTimeId;//id таймера удержания кнопки для записи в EEPROM.
+int _timerUpdateTemperatureId;
+int _timerRegEncoderButtonId;
 
-ButtonEnum oldCurrenButtonClick = ButtonEnum::Unknown; //нажата кнопка по умолчанию.
-int const buttonCount =5; // количество кнопок на аналоговом порту оброботки нажатия клавишь PC3
-int const adcKeyValue[buttonCount] = {30, 155, 500, 535, 1300}; // пороги срабатывания кнопок.
-
-//bool isStabilization = false;//идикация стабилизации тока.
-
-unsigned int const logoTime = 2*64000; //время показа стартового лого
-long const selectModeResetTime = 3*64000; //через сколько сборосится режим редактирования PWM.
-long const buttonSavePWMVoltageInEepromTime = 3*64000; //время удержания кнопки памяти до сохраниения PWM.
-long const timeUpdateTemperature = .5*64000; // период проверки максимальной температуры.
-long const timeRegEncoderButton = .5*64000; // премя ожидания следуюцего нажатия кнопки энкодера.
+ButtonEnum _oldCurrenButtonClick = ButtonEnum::Unknown; //нажата кнопка по умолчанию.
+int const _adcKeyValue[buttonCount] = {30, 155, 500, 535, 1300}; // пороги срабатывания кнопок.
 
 //температура
-// Создаем объект OneWire
-OneWire oneWire(TemperaturePin);
+OneWire* _oneWire;
 // Создаем объект DallasTemperature для работы с сенсорами, передавая ему ссылку на объект для работы с 1-Wire.
-DallasTemperature dallasSensors(&oneWire);
-int currentTemperature =0;
-int const maxTemperature = 80;
-bool temperatuerFuse = false;
+DallasTemperature* _dallasSensors;
+int _currentTemperature =0;
+bool _temperatuerFuse = false;
 
-int countEncoderButtonClick =0; //количество нажатий кнопки энкодера.
+int _countEncoderButtonClick =0; //количество нажатий кнопки энкодера.
 
-IDisplay* disply = new Display16x2();
-int const modesCount = 5;
-IMode* modes[modesCount];
-IMode* funMode;
-IMode* oldMode;
-IMode* mode;
+IDisplay* _disply;
+IMode** _modesArray;
+IMode* _funMode;
+IMode* _oldMode;
+IMode* _mode;
 
 void setup()
 {
 	TCCR0B = TCCR0B & B11111000 | B00000001;
-	//TCCR1B = TCCR1B & B11111000 | B00000001;
+	//инициализация дисплея и стартовая заставка.
+	_disply = new Display16x2();
+	_modesArray = new  IMode*[modesCount];
+	_modesArray[0] =  new OFFMode(_disply);
+	_modesArray[1] =  new StandardMode(_disply);
+	_modesArray[2] =  new SetVoltageMode(PWMVoltagesPin, RealVoltagesPin, _disply);
+	_modesArray[3] =  new SetAmperagedMode(PWMAmperagedPin, RealAmperagePin, BackupAmperagePin, StabAmperageLedPin, _disply);
+	_modesArray[4] =  new PowerMode(_modesArray[2], _modesArray[3], _disply);
+	_funMode = new FunMode(_disply, &_currentTemperature);
 	
-	modes[0] = new OFFMode(disply);
-	modes[1] = new StandardMode(disply);
-	modes[2] = new SetVoltageMode(PWMVoltagesPin, RealVoltagesPin, disply);
-	modes[3] = new SetAmperagedMode(PWMAmperagedPin, RealAmperagePin, BackupAmperagePin, StabAmperageLedPin, disply);
-	modes[4] = new PowerMode(modes[2], modes[3], disply);
-	funMode = new FunMode(disply, &currentTemperature);
-	
-	oldMode =  modes[0];
-	mode = modes[0];
+	_oldMode =  _modesArray[0];
+	_mode = _modesArray[0];
+	_oneWire = new OneWire(TemperaturePin);
 	
 	//енкодер
 	pinMode(EncoderRightPin, INPUT);//-энкодер право/лево
@@ -141,28 +138,31 @@ void setup()
 	//прерывание для энкодера
 	attachInterrupt(INT1, EncoderUpdate, CHANGE);
 	//инициализация датчика температуры
-	dallasSensors.setWaitForConversion(false);
-	dallasSensors.begin();
+	_dallasSensors = new DallasTemperature(_oneWire);
+	_dallasSensors->setWaitForConversion(false);
+	_dallasSensors->begin();
+	_timer = new SimpleTimer();
 	//инициализация таймера автоматического вызода из режима редактирования.
-	timerSelectModeResetId = timerSelectModeReset.setInterval(selectModeResetTime, SelectModeReset);
-	//таймер для отсчета удержания кнопки памяти.
-	timerPressButtonTimeId = timerPressButtonTime.setInterval(buttonSavePWMVoltageInEepromTime, SavePWMVoltageInEeprom);
+	_timerSelectModeResetId = _timer->setInterval(selectModeResetTime, SelectModeReset);
 	//таймер для проверки превышения температуры
-	timerUpdateTemperatureId = timerUpdateTemperature.setInterval(timeUpdateTemperature, CheckMaxTemperature);
+	_timerUpdateTemperatureId = _timer->setInterval(timeUpdateTemperature, CheckMaxTemperature);
 	//таймер регистрации количество нажатия кнопки энкодера
-	timerRegEncoderButtonId = timerRegEncoderButton.setInterval(timeRegEncoderButton, RegEncoderButton);
+	_timerRegEncoderButtonId = _timer->setInterval(timeRegEncoderButton, RegEncoderButton);
+	_timerPressButtonTime = new SimpleTimer();
+	//таймер для отсчета удержания кнопки памяти.
+	_timerPressButtonTimeId = _timerPressButtonTime->setInterval(buttonSavePWMVoltageInEepromTime, SavePWMVoltageInEeprom);
 
-	//инициализация дисплея и стартовая заставка.
-	disply->InitDisplay(strVer);
+	// стартовая заставка.
+	_disply->InitDisplay(_strVer);
 	//востаовми настройки из памяти.
 	for(int i=0;i<modesCount;i++)
 	{
-		modes[i]->ReadEEPROM();
+		_modesArray[i]->ReadEEPROM();
 	}
-	funMode->ReadEEPROM();
+	_funMode->ReadEEPROM();
 
 	delay(logoTime);
-	mode->PrintState();
+	_mode->PrintState();
 }
 
 // Add the main program code into the continuous loop() function
@@ -171,80 +171,78 @@ void loop()
 	OnPowerSeplay();
 	GetButtonClick();
 	
-	timerSelectModeReset.run();
-	timerUpdateTemperature.run();
-	timerRegEncoderButton.run();
+	_timer->run();
 	
-	mode->PrintMode();
+	_mode->PrintMode();
 	
-	funMode->WritePWM();
+	_funMode->WritePWM();
 	
-	if(mode->GetTypeMode() == ModeEnum::OFF
-	|| (mode->GetTypeMode() == ModeEnum::FunMode
-	&& oldMode->GetTypeMode() == ModeEnum::OFF)) return;
+	if(_mode->GetTypeMode() == ModeEnum::OFF
+	|| (_mode->GetTypeMode() == ModeEnum::FunMode
+	&& _oldMode->GetTypeMode() == ModeEnum::OFF)) return;
 
 	for(int i=0;i<modesCount; i++)
 	{
-		modes[i]->WritePWM();
+		_modesArray[i]->WritePWM();
 	}
 
 	ReadADC();
-	if(mode->GetTypeMode() == ModeEnum::Standard
-	||mode->GetTypeMode() == ModeEnum::SetAmperaged
-	||mode->GetTypeMode() == ModeEnum::SetVoltage )
+	if(_mode->GetTypeMode() == ModeEnum::Standard
+	||_mode->GetTypeMode() == ModeEnum::SetAmperaged
+	||_mode->GetTypeMode() == ModeEnum::SetVoltage )
 	{
 		for(int i=1;i<modesCount; i++)
 		{
-			modes[i]->PrintState();
+			_modesArray[i]->PrintState();
 		}
 	}
 }
 
 void CheckMaxTemperature()
 {
-	dallasSensors.requestTemperatures();
-	currentTemperature = max((int)dallasSensors.getTempCByIndex(0), -99);
-	if(currentTemperature< maxTemperature)
+	_dallasSensors->requestTemperatures();
+	_currentTemperature = max((int)_dallasSensors->getTempCByIndex(0), -99);
+	if(_currentTemperature< maxTemperature)
 	{
-		if(temperatuerFuse)
+		if(_temperatuerFuse)
 		{
-			temperatuerFuse = false;
-			modes[0]->PrintState();
+			_temperatuerFuse = false;
+			_modesArray[0]->PrintState();
 		}
 		return;
 	}
-	temperatuerFuse = true;
-	mode = modes[0];
-	disply->TemperaturePrint(currentTemperature);
+	_temperatuerFuse = true;
+	_mode = _modesArray[0];
+	_disply->TemperaturePrint(_currentTemperature);
 }
 
 void OnPowerSeplay()
 {
-	digitalWrite(PSONPin, mode->GetTypeMode() == ModeEnum::OFF
-	||  (mode->GetTypeMode() == ModeEnum::FunMode
-	&& oldMode->GetTypeMode() == ModeEnum::OFF) ? LOW:HIGH);
+	digitalWrite(PSONPin, _mode->GetTypeMode() == ModeEnum::OFF
+	||  (_mode->GetTypeMode() == ModeEnum::FunMode
+	&& _oldMode->GetTypeMode() == ModeEnum::OFF) ? LOW:HIGH);
 }
 
 void SelectModeReset()
 {
-	if(mode->GetTypeMode() == ModeEnum::OFF
-	|| mode->GetTypeMode() == ModeEnum::Standard
-	|| mode->GetTypeMode() == ModeEnum::FunMode) return;
+	if(_mode->GetTypeMode() == ModeEnum::OFF
+	|| _mode->GetTypeMode() == ModeEnum::Standard
+	|| _mode->GetTypeMode() == ModeEnum::FunMode) return;
 	SaveModeValueInEeprom();
-	mode = modes[1];
+	_mode = _modesArray[1];
 }
 
 void ReadPWMVoltageInEeprom(ButtonEnum arg)
 {
-	if(mode->GetTypeMode() != ModeEnum::SetVoltage ) return;
-	mode->ReadPWMInEeprom(arg);
+	if(_mode->GetTypeMode() != ModeEnum::SetVoltage ) return;
+	_mode->ReadPWMInEeprom(arg);
 }
 
 void SavePWMVoltageInEeprom()
 {
-	if(mode->GetTypeMode() == ModeEnum::SetVoltage )
+	if(_mode->GetTypeMode() == ModeEnum::SetVoltage )
 	{
-		mode->SavePWMInEeprom(oldCurrenButtonClick);
+		_mode->SavePWMInEeprom(_oldCurrenButtonClick);
 	}
 }
 
@@ -252,7 +250,7 @@ void ReadADC()
 {
 	for(int i=0;i<modesCount; i++)
 	{
-		modes[i]->ReadADC();
+		_modesArray[i]->ReadADC();
 	}
 }
 
@@ -280,79 +278,79 @@ void EncoderUpdate()
 		}
 	}
 	sei(); // Разрешаем обработку прерываний
-	timerSelectModeReset.restartTimer(timerSelectModeResetId);
+	_timer->restartTimer(_timerSelectModeResetId);
 }
 
 void RegEncoderButton()
 {
-	if(countEncoderButtonClick == 0)
+	if(_countEncoderButtonClick == 0)
 	{
 		return;
 	}
-	if(mode->GetTypeMode() !=ModeEnum::OFF
-	&& countEncoderButtonClick >= 5)
+	if(_mode->GetTypeMode() !=ModeEnum::OFF
+	&& _countEncoderButtonClick >= 5)
 	{
-		mode = modes[0];
-		disply->Clear();
-		mode->PrintState();
+		_mode = _modesArray[0];
+		_disply->Clear();
+		_mode->PrintState();
 	}
-	else if(countEncoderButtonClick == 3)
+	else if(_countEncoderButtonClick == 3)
 	{
-		if(mode->GetTypeMode() != ModeEnum::FunMode)
+		if(_mode->GetTypeMode() != ModeEnum::FunMode)
 		{
-			oldMode = mode;
+			_oldMode = _mode;
 		}
-		mode = funMode;
-		mode->PrintState();
+		_mode = _funMode;
+		_mode->PrintState();
 	}
-	else if(mode->GetTypeMode() ==ModeEnum::FunMode)
+	else if(_mode->GetTypeMode() ==ModeEnum::FunMode)
 	{
-		mode =oldMode;
-		disply->Clear();
-		mode->PrintState();
+		_mode =_oldMode;
+		_disply->Clear();
+		_mode->PrintState();
 	}
 	else
 	{
 		ModeSelection();
 	}
-	countEncoderButtonClick = 0;
+	_countEncoderButtonClick = 0;
 }
 
 void IncrementEncoderValue()
 {
-	mode->IncrementEncoderValue();
+	_mode->IncrementEncoderValue();
 }
 
 void DecrementEncoderValue()
 {
-	mode->DecrementEncoderValue();
+	_mode->DecrementEncoderValue();
 }
 
 void ModeSelection()
 {
-	switch(mode->GetTypeMode())
+	switch(_mode->GetTypeMode())
 	{
 		case ModeEnum::OFF:
 		{
-			disply->Clear();
-			mode = modes[1];
+			_disply->Clear();
+			_mode = _modesArray[1];
 			break;
 		}
 		case ModeEnum::Standard:
 		{
-			mode = modes[2];
+			_mode = _modesArray[2];
 			break;
 		}
 		case ModeEnum::SetVoltage:
 		{
 			SaveModeValueInEeprom();
-			mode =  modes[3];
+			_mode = _modesArray[3];
 			break;
 		}
 		case ModeEnum::SetAmperaged:
 		{
 			SaveModeValueInEeprom();
-			mode =   modes[1];
+			_mode = _modesArray[1];
 			break;
 		}
 	}
@@ -360,7 +358,7 @@ void ModeSelection()
 
 void SaveModeValueInEeprom()
 {
-	mode->SaveEEPROM();
+	_mode->SaveEEPROM();
 }
 
 void GetButtonClick()
@@ -368,14 +366,14 @@ void GetButtonClick()
 	int input = analogRead(ButtonPin);
 	for(int i = 0; i < buttonCount; i++)
 	{
-		if(input < adcKeyValue[i])
+		if(input < _adcKeyValue[i])
 		{
 			ButtonEnum currenButtonClick = static_cast<ButtonEnum>(i);
-			if(oldCurrenButtonClick != currenButtonClick)
+			if(_oldCurrenButtonClick != currenButtonClick)
 			{
 				OnButtonDownClick(currenButtonClick);
-				OnButtonUpClick(oldCurrenButtonClick);
-				oldCurrenButtonClick = currenButtonClick;
+				OnButtonUpClick(_oldCurrenButtonClick);
+				_oldCurrenButtonClick = currenButtonClick;
 			}
 			else
 			{
@@ -389,29 +387,29 @@ void GetButtonClick()
 void OnButtonUpClick(ButtonEnum arg)
 {
 	ReadPWMVoltageInEeprom(arg);
-	timerSelectModeReset.restartTimer(timerSelectModeResetId);
+	_timer->restartTimer(_timerSelectModeResetId);
 }
 
 void PressButtonTime()
 {
-	if(oldCurrenButtonClick == ButtonEnum::MemoryButton1
-	|| oldCurrenButtonClick == ButtonEnum::MemoryButton2
-	|| oldCurrenButtonClick == ButtonEnum::MemoryButton3
-	|| oldCurrenButtonClick == ButtonEnum::EncoderButton)
+	if(_oldCurrenButtonClick == ButtonEnum::MemoryButton1
+	|| _oldCurrenButtonClick == ButtonEnum::MemoryButton2
+	|| _oldCurrenButtonClick == ButtonEnum::MemoryButton3
+	|| _oldCurrenButtonClick == ButtonEnum::EncoderButton)
 	{
-		timerPressButtonTime.run();
-		timerSelectModeReset.restartTimer(timerSelectModeResetId);
+		_timerPressButtonTime->run();
+		_timer->restartTimer(_timerSelectModeResetId);
 	}
 }
 
 void OnButtonDownClick(ButtonEnum arg)
 {
-	timerPressButtonTime.restartTimer(timerPressButtonTimeId);
+	_timerPressButtonTime->restartTimer(_timerPressButtonTimeId);
 	if(arg == ButtonEnum::EncoderButton)
 	{
-		countEncoderButtonClick++;
-		timerSelectModeReset.restartTimer(timerSelectModeResetId);
-		timerRegEncoderButton.restartTimer(timerRegEncoderButtonId);
+		_countEncoderButtonClick++;
+		_timer->restartTimer(_timerSelectModeResetId);
+		_timer->restartTimer(_timerRegEncoderButtonId);
 	}
 }
 
