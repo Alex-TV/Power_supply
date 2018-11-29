@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00002f1c  00000000  00000000  00035dcc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00006600  00000000  00000000  00038ce8  2**0
+ 10 .debug_str    000065f8  00000000  00000000  00038ce8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000f0da  00000000  00000000  0003f2e8  2**0
+ 11 .debug_loc    0000f0da  00000000  00000000  0003f2e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000e10  00000000  00000000  0004e3c2  2**0
+ 12 .debug_ranges 00000e10  00000000  00000000  0004e3ba  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1742,7 +1742,7 @@ void FanMode::DecrementEncoderValue(){}
 
 ModeEnum FanMode::GetTypeMode()
 {
-	return ModeEnum::FunMode;
+	return ModeEnum::FanMode;
 }
      b0e:	85 e0       	ldi	r24, 0x05	; 5
      b10:	90 e0       	ldi	r25, 0x00	; 0
@@ -4302,7 +4302,7 @@ void OnPowerSeplay()
     18d8:	09 95       	icall
     18da:	01 97       	sbiw	r24, 0x01	; 1
     18dc:	d9 f0       	breq	.+54     	; 0x1914 <_Z13OnPowerSeplayv+0x50>
-	||  (_mode->GetTypeMode() == ModeEnum::FunMode
+	||  (_mode->GetTypeMode() == ModeEnum::FanMode
     18de:	80 91 94 02 	lds	r24, 0x0294	; 0x800294 <__data_end>
     18e2:	90 91 95 02 	lds	r25, 0x0295	; 0x800295 <__data_end+0x1>
     18e6:	dc 01       	movw	r26, r24
@@ -4320,7 +4320,7 @@ void OnPowerSeplay()
 	digitalWrite(PSONPin, _mode->GetTypeMode() == ModeEnum::OFF
     18f4:	05 97       	sbiw	r24, 0x05	; 5
     18f6:	81 f4       	brne	.+32     	; 0x1918 <_Z13OnPowerSeplayv+0x54>
-	||  (_mode->GetTypeMode() == ModeEnum::FunMode
+	||  (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF) ? LOW:HIGH);
     18f8:	80 91 96 02 	lds	r24, 0x0296	; 0x800296 <_oldMode>
     18fc:	90 91 97 02 	lds	r25, 0x0297	; 0x800297 <_oldMode+0x1>
@@ -4343,7 +4343,7 @@ void OnPowerSeplay()
     1914:	60 e0       	ldi	r22, 0x00	; 0
     1916:	01 c0       	rjmp	.+2      	; 0x191a <_Z13OnPowerSeplayv+0x56>
     1918:	61 e0       	ldi	r22, 0x01	; 1
-	||  (_mode->GetTypeMode() == ModeEnum::FunMode
+	||  (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF) ? LOW:HIGH);
     191a:	87 e0       	ldi	r24, 0x07	; 7
     191c:	0c 94 a6 1e 	jmp	0x3d4c	; 0x3d4c <digitalWrite>
@@ -4570,7 +4570,7 @@ void SelectModeReset()
     1a2a:	e0 2d       	mov	r30, r0
     1a2c:	09 95       	icall
 	|| _mode->GetTypeMode() == ModeEnum::Standard
-	|| _mode->GetTypeMode() == ModeEnum::FunMode) return;
+	|| _mode->GetTypeMode() == ModeEnum::FanMode) return;
     1a2e:	01 97       	sbiw	r24, 0x01	; 1
     1a30:	31 f1       	breq	.+76     	; 0x1a7e <_Z15SelectModeResetv+0x66>
 }
@@ -4590,7 +4590,7 @@ void SelectModeReset()
     1a46:	09 95       	icall
     1a48:	02 97       	sbiw	r24, 0x02	; 2
     1a4a:	c9 f0       	breq	.+50     	; 0x1a7e <_Z15SelectModeResetv+0x66>
-	|| _mode->GetTypeMode() == ModeEnum::FunMode) return;
+	|| _mode->GetTypeMode() == ModeEnum::FanMode) return;
     1a4c:	80 91 94 02 	lds	r24, 0x0294	; 0x800294 <__data_end>
     1a50:	90 91 95 02 	lds	r25, 0x0295	; 0x800295 <__data_end+0x1>
     1a54:	dc 01       	movw	r26, r24
@@ -4776,7 +4776,7 @@ void RegEncoderButton()
     1b8c:	31 05       	cpc	r19, r1
     1b8e:	d1 f4       	brne	.+52     	; 0x1bc4 <_Z16RegEncoderButtonv+0xc2>
 	{
-		if(_mode->GetTypeMode() != ModeEnum::FunMode)
+		if(_mode->GetTypeMode() != ModeEnum::FanMode)
     1b90:	dc 01       	movw	r26, r24
     1b92:	ed 91       	ld	r30, X+
     1b94:	fc 91       	ld	r31, X
@@ -4801,7 +4801,7 @@ void RegEncoderButton()
     1bc2:	d3 cf       	rjmp	.-90     	; 0x1b6a <_Z16RegEncoderButtonv+0x68>
 		_mode->PrintState();
 	}
-	else if(_mode->GetTypeMode() ==ModeEnum::FunMode)
+	else if(_mode->GetTypeMode() ==ModeEnum::FanMode)
     1bc4:	dc 01       	movw	r26, r24
     1bc6:	ed 91       	ld	r30, X+
     1bc8:	fc 91       	ld	r31, X
@@ -5069,7 +5069,7 @@ void loop()
     1d64:	f1 85       	ldd	r31, Z+9	; 0x09
     1d66:	e0 2d       	mov	r30, r0
     1d68:	09 95       	icall
-	|| (_mode->GetTypeMode() == ModeEnum::FunMode
+	|| (_mode->GetTypeMode() == ModeEnum::FanMode
     1d6a:	01 97       	sbiw	r24, 0x01	; 1
     1d6c:	09 f4       	brne	.+2      	; 0x1d70 <loop+0x60>
     1d6e:	6e c0       	rjmp	.+220    	; 0x1e4c <loop+0x13c>
@@ -5105,7 +5105,7 @@ void loop()
 {
     1da6:	c0 e0       	ldi	r28, 0x00	; 0
     1da8:	d0 e0       	ldi	r29, 0x00	; 0
-	|| (_mode->GetTypeMode() == ModeEnum::FunMode
+	|| (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF)) return;
 
 	for(int i=0;i<modesCount; i++)
@@ -5127,7 +5127,7 @@ void loop()
     1dc8:	22 96       	adiw	r28, 0x02	; 2
 	
 	if(_mode->GetTypeMode() == ModeEnum::OFF
-	|| (_mode->GetTypeMode() == ModeEnum::FunMode
+	|| (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF)) return;
 
 	for(int i=0;i<modesCount; i++)

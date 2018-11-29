@@ -2609,56 +2609,56 @@ END GROUP
  .debug_frame   0x00002498      0xa60 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
  .debug_frame   0x00002ef8       0x24 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
 
-.debug_str      0x00000000     0x6600
+.debug_str      0x00000000     0x65f8
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x50e CoolerMotor/LinarCoolerMotor.o
                                 0x57b (size before relaxing)
- .debug_str     0x00000716     0x1333 Display/Display16x2.o
+ .debug_str     0x00000716     0x132b Display/Display16x2.o
                                0x165d (size before relaxing)
- .debug_str     0x00001a49      0x516 Mode/FanMode.o
-                               0x1768 (size before relaxing)
- .debug_str     0x00001f5f      0x1f8 Mode/OFFMode.o
+ .debug_str     0x00001a41      0x516 Mode/FanMode.o
+                               0x1760 (size before relaxing)
+ .debug_str     0x00001f57      0x1f8 Mode/OFFMode.o
                                0x1679 (size before relaxing)
- .debug_str     0x00002157      0x249 Mode/PowerMode.o
+ .debug_str     0x0000214f      0x249 Mode/PowerMode.o
                                0x16dc (size before relaxing)
- .debug_str     0x000023a0      0x670 Mode/SetAmperagedMode.o
+ .debug_str     0x00002398      0x670 Mode/SetAmperagedMode.o
                                0x1b68 (size before relaxing)
- .debug_str     0x00002a10      0x2b3 Mode/SetVoltageMode.o
+ .debug_str     0x00002a08      0x2b3 Mode/SetVoltageMode.o
                                0x1afc (size before relaxing)
- .debug_str     0x00002cc3      0x267 Mode/StandardMode.o
+ .debug_str     0x00002cbb      0x267 Mode/StandardMode.o
                                0x16ed (size before relaxing)
- .debug_str     0x00002f2a     0x1603 Sketch.o
+ .debug_str     0x00002f22     0x1603 Sketch.o
                                0x2e30 (size before relaxing)
- .debug_str     0x0000452d      0x154 src/libraries/DallasTemperature/DallasTemperature.o
+ .debug_str     0x00004525      0x154 src/libraries/DallasTemperature/DallasTemperature.o
                                0x132b (size before relaxing)
- .debug_str     0x00004681      0x8a4 src/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.o
+ .debug_str     0x00004679      0x8a4 src/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.o
                                 0xc0d (size before relaxing)
- .debug_str     0x00004f25      0x14d src/libraries/OneWire/src/OneWire.o
+ .debug_str     0x00004f1d      0x14d src/libraries/OneWire/src/OneWire.o
                                 0x678 (size before relaxing)
- .debug_str     0x00005072       0x74 src/libraries/SimpleTimer/SimpleTimer.o
+ .debug_str     0x0000506a       0x74 src/libraries/SimpleTimer/SimpleTimer.o
                                 0x5d1 (size before relaxing)
- .debug_str     0x000050e6      0x2bb src/libraries/Wire/src/utility/twi.o
+ .debug_str     0x000050de      0x2bb src/libraries/Wire/src/utility/twi.o
                                 0x3c7 (size before relaxing)
- .debug_str     0x000053a1      0x8dc src/libraries/Wire/src/Wire.o
+ .debug_str     0x00005399      0x8dc src/libraries/Wire/src/Wire.o
                                0x18be (size before relaxing)
- .debug_str     0x00005c7d       0xa7 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_str     0x00005c75       0xa7 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(main.o)
                                 0x2ac (size before relaxing)
- .debug_str     0x00005d24       0x3a R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(new.o)
+ .debug_str     0x00005d1c       0x3a R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(new.o)
                                 0x1c2 (size before relaxing)
- .debug_str     0x00005d5e      0x353 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(Print.o)
+ .debug_str     0x00005d56      0x353 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(Print.o)
                                0x123a (size before relaxing)
- .debug_str     0x000060b1       0x72 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_str     0x000060a9       0x72 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WInterrupts.o)
                                 0x22f (size before relaxing)
- .debug_str     0x00006123       0x6d R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_str     0x0000611b       0x6d R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
                                 0x242 (size before relaxing)
- .debug_str     0x00006190       0x5b R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_str     0x00006188       0x5b R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
                                 0x246 (size before relaxing)
- .debug_str     0x000061eb       0x51 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_str     0x000061e3       0x51 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
                                 0x2a7 (size before relaxing)
- .debug_str     0x0000623c      0x3a8 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
+ .debug_str     0x00006234      0x3a8 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
                                0x118d (size before relaxing)
- .debug_str     0x000065e4       0x1c R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_str     0x000065dc       0x1c R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
                                 0x137 (size before relaxing)
 
 .debug_loc      0x00000000     0xf0da

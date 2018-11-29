@@ -24,7 +24,7 @@ void FanMode::DecrementEncoderValue(){}
 
 ModeEnum FanMode::GetTypeMode()
 {
-	return ModeEnum::FunMode;
+	return ModeEnum::FanMode;
 }
 
 void FanMode::SaveEEPROM(){}

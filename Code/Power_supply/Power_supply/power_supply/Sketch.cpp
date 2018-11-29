@@ -178,7 +178,7 @@ void loop()
 	_fanMode->WritePWM();
 	
 	if(_mode->GetTypeMode() == ModeEnum::OFF
-	|| (_mode->GetTypeMode() == ModeEnum::FunMode
+	|| (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF)) return;
 
 	for(int i=0;i<modesCount; i++)
@@ -219,7 +219,7 @@ void CheckMaxTemperature()
 void OnPowerSeplay()
 {
 	digitalWrite(PSONPin, _mode->GetTypeMode() == ModeEnum::OFF
-	||  (_mode->GetTypeMode() == ModeEnum::FunMode
+	||  (_mode->GetTypeMode() == ModeEnum::FanMode
 	&& _oldMode->GetTypeMode() == ModeEnum::OFF) ? LOW:HIGH);
 }
 
@@ -227,7 +227,7 @@ void SelectModeReset()
 {
 	if(_mode->GetTypeMode() == ModeEnum::OFF
 	|| _mode->GetTypeMode() == ModeEnum::Standard
-	|| _mode->GetTypeMode() == ModeEnum::FunMode) return;
+	|| _mode->GetTypeMode() == ModeEnum::FanMode) return;
 	SaveModeValueInEeprom();
 	_mode = _modesArray[1];
 }
@@ -296,14 +296,14 @@ void RegEncoderButton()
 	}
 	else if(_countEncoderButtonClick == 3)
 	{
-		if(_mode->GetTypeMode() != ModeEnum::FunMode)
+		if(_mode->GetTypeMode() != ModeEnum::FanMode)
 		{
 			_oldMode = _mode;
 		}
 		_mode = _fanMode;
 		_mode->PrintState();
 	}
-	else if(_mode->GetTypeMode() ==ModeEnum::FunMode)
+	else if(_mode->GetTypeMode() ==ModeEnum::FanMode)
 	{
 		_mode =_oldMode;
 		_disply->Clear();

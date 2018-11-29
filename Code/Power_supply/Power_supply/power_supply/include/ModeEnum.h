@@ -16,7 +16,7 @@ enum class  ModeEnum{
 	Standard,
 	SetVoltage,
 	SetAmperaged,
-	FunMode,
+	FanMode,
 	PowerMode
 };// ModeEnum
 
