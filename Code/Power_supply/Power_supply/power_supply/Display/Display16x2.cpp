@@ -175,7 +175,7 @@ void Display16x2::PrintTempAndFunStatus(int temp, int funPower)
 	}
 	
 	_lcd->setCursor(8,0);
-	_lcd->print("Fun=");
+	_lcd->print("Fan=");
 	_lcd->setCursor(12,0);
 	if(funPower == 0)
 	{

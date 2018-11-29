@@ -26,7 +26,7 @@ Author:     GML-AKOVALEV\koval
 #include "Mode/UnknownMode.h"
 #include "Mode/OFFMode.h"
 #include "Mode/SetAmperagedMode.h"
-#include "Mode/FunMode.h"
+#include "Mode/FanMode.h"
 #include "Mode/PowerMode.h"
 
 //порты
@@ -103,7 +103,7 @@ int _countEncoderButtonClick =0; //количество нажатий кноп�
 
 IDisplay* _disply;
 IMode** _modesArray;
-IMode* _funMode;
+IMode* _fanMode;
 IMode* _oldMode;
 IMode* _mode;
 
@@ -118,7 +118,7 @@ void setup()
 	_modesArray[2] =  new SetVoltageMode(PWMVoltagesPin, RealVoltagesPin, _disply);
 	_modesArray[3] =  new SetAmperagedMode(PWMAmperagedPin, RealAmperagePin, BackupAmperagePin, StabAmperageLedPin, _disply);
 	_modesArray[4] =  new PowerMode(_modesArray[2], _modesArray[3], _disply);
-	_funMode = new FunMode(_disply, &_currentTemperature);
+	_fanMode = new FanMode(_disply, &_currentTemperature);
 	
 	_oldMode =  _modesArray[0];
 	_mode = _modesArray[0];
@@ -159,7 +159,7 @@ void setup()
 	{
 		_modesArray[i]->ReadEEPROM();
 	}
-	_funMode->ReadEEPROM();
+	_fanMode->ReadEEPROM();
 
 	delay(logoTime);
 	_mode->PrintState();
@@ -175,7 +175,7 @@ void loop()
 	
 	_mode->PrintMode();
 	
-	_funMode->WritePWM();
+	_fanMode->WritePWM();
 	
 	if(_mode->GetTypeMode() == ModeEnum::OFF
 	|| (_mode->GetTypeMode() == ModeEnum::FunMode
@@ -300,7 +300,7 @@ void RegEncoderButton()
 		{
 			_oldMode = _mode;
 		}
-		_mode = _funMode;
+		_mode = _fanMode;
 		_mode->PrintState();
 	}
 	else if(_mode->GetTypeMode() ==ModeEnum::FunMode)

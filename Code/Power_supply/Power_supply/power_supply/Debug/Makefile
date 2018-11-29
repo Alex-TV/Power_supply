@@ -70,7 +70,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../CoolerMotor/LinarCoolerMotor.cpp \
 ../Display/Display16x2.cpp \
-../Mode/FunMode.cpp \
+../Mode/FanMode.cpp \
 ../Mode/OFFMode.cpp \
 ../Mode/PowerMode.cpp \
 ../Mode/SetAmperagedMode.cpp \
@@ -94,7 +94,7 @@ ASM_SRCS +=
 OBJS +=  \
 CoolerMotor/LinarCoolerMotor.o \
 Display/Display16x2.o \
-Mode/FunMode.o \
+Mode/FanMode.o \
 Mode/OFFMode.o \
 Mode/PowerMode.o \
 Mode/SetAmperagedMode.o \
@@ -111,7 +111,7 @@ src/libraries/Wire/src/Wire.o
 OBJS_AS_ARGS +=  \
 CoolerMotor/LinarCoolerMotor.o \
 Display/Display16x2.o \
-Mode/FunMode.o \
+Mode/FanMode.o \
 Mode/OFFMode.o \
 Mode/PowerMode.o \
 Mode/SetAmperagedMode.o \
@@ -128,7 +128,7 @@ src/libraries/Wire/src/Wire.o
 C_DEPS +=  \
 CoolerMotor/LinarCoolerMotor.d \
 Display/Display16x2.d \
-Mode/FunMode.d \
+Mode/FanMode.d \
 Mode/OFFMode.d \
 Mode/PowerMode.d \
 Mode/SetAmperagedMode.d \
@@ -145,7 +145,7 @@ src/libraries/Wire/src/Wire.d
 C_DEPS_AS_ARGS +=  \
 CoolerMotor/LinarCoolerMotor.d \
 Display/Display16x2.d \
-Mode/FunMode.d \
+Mode/FanMode.d \
 Mode/OFFMode.d \
 Mode/PowerMode.d \
 Mode/SetAmperagedMode.d \
@@ -188,7 +188,7 @@ Display/Display16x2.o: ../Display/Display16x2.cpp
 	@echo Finished building: $<
 	
 
-Mode/FunMode.o: ../Mode/FunMode.cpp
+Mode/FanMode.o: ../Mode/FanMode.cpp
 	@echo Building file: $<
 	@echo Invoking: AVR8/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-g++.exe$(QUOTE) -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L -DARDUINO=10806 -DARDUINO_AVR_NANO -DARDUINO_ARCH_AVR  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include" -I"..\\..\ArduinoCore\include\core" -I"..\\..\ArduinoCore\include\Sketch1\Sketch1\__vm" -I"..\\..\ArduinoCore\include\variants\eightanaloginputs" -I"..\\..\ArduinoCore\include\variants\standard" -I"../include/libraries/LiquidCrystal_I2C/src" -I"..\include\libraries\Wire\src" -I"..\include\libraries\Wire\src\utility" -I"../include/libraries/SimpleTimer/src" -I"..\include\libraries\EEPROM\src" -I"../include/libraries/DallasTemperature/src" -I"../include/libraries/OneWire/src" -I"../include"  -Os -fno-threadsafe-statics -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -w -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega328p" -c -std=gnu++11 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

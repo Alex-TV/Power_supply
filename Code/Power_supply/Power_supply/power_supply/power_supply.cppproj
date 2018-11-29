@@ -307,10 +307,10 @@
     <Compile Include="include\ModeEnum.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Mode\FunMode.cpp">
+    <Compile Include="Mode\FanMode.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Mode\FunMode.h">
+    <Compile Include="Mode\FanMode.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Mode\OFFMode.cpp">

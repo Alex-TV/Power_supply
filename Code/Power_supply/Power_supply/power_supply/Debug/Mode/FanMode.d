@@ -1,4 +1,5 @@
-Sketch.d Sketch.o: .././Sketch.cpp \
+Mode/FanMode.d Mode/FanMode.o: ../Mode/FanMode.cpp ../Mode/FanMode.h \
+ ../include/IMode.h ../include/ModeEnum.h \
  ..\\..\ArduinoCore\include\core/Arduino.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
@@ -35,22 +36,15 @@ Sketch.d Sketch.o: .././Sketch.cpp \
  ..\\..\ArduinoCore\include\core/Arduino.h \
  ..\\..\ArduinoCore\include\variants\eightanaloginputs/pins_arduino.h \
  ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h \
- ..\include\libraries\EEPROM\src/EEPROM.h \
- ../include/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.h \
- ..\\..\ArduinoCore\include\core/Print.h \
- ../include/libraries/SimpleTimer/src/SimpleTimer.h \
- ../include/libraries/DallasTemperature/src/DallasTemperature.h \
- ../include/libraries/OneWire/src/OneWire.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\crc16.h \
- ../include/libraries/OneWire/src/util/OneWire_direct_regtype.h \
- .././Display/Display16x2.h ..\\..\ArduinoCore\include\core/WString.h \
- ../include/ModeEnum.h ../include/IDisplay.h ../include/ButtonEnum.h \
- ../include/IMode.h ../include/ModeEnum.h ../include/IDisplay.h \
- ../include/ButtonEnum.h .././Mode/StandardMode.h \
- .././Mode/SetVoltageMode.h .././Mode/UnknownMode.h .././Mode/OFFMode.h \
- .././Mode/SetAmperagedMode.h .././Mode/FanMode.h \
- ../include/ICoolerMotor.h .././Mode/..\CoolerMotor\LinarCoolerMotor.h \
- .././Mode/PowerMode.h
+ ../include/IDisplay.h ..\\..\ArduinoCore\include\core/Print.h \
+ ../include/ButtonEnum.h ../include/ModeEnum.h ../include/ButtonEnum.h \
+ ../include/ICoolerMotor.h ../Mode/..\CoolerMotor\LinarCoolerMotor.h
+
+../Mode/FanMode.h:
+
+../include/IMode.h:
+
+../include/ModeEnum.h:
 
 ..\\..\ArduinoCore\include\core/Arduino.h:
 
@@ -124,54 +118,16 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ..\\..\ArduinoCore\include\variants\eightanaloginputs/../standard/pins_arduino.h:
 
-..\include\libraries\EEPROM\src/EEPROM.h:
-
-../include/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.h:
+../include/IDisplay.h:
 
 ..\\..\ArduinoCore\include\core/Print.h:
 
-../include/libraries/SimpleTimer/src/SimpleTimer.h:
-
-../include/libraries/DallasTemperature/src/DallasTemperature.h:
-
-../include/libraries/OneWire/src/OneWire.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\crc16.h:
-
-../include/libraries/OneWire/src/util/OneWire_direct_regtype.h:
-
-.././Display/Display16x2.h:
-
-..\\..\ArduinoCore\include\core/WString.h:
+../include/ButtonEnum.h:
 
 ../include/ModeEnum.h:
 
-../include/IDisplay.h:
-
 ../include/ButtonEnum.h:
-
-../include/IMode.h:
-
-../include/ModeEnum.h:
-
-../include/IDisplay.h:
-
-../include/ButtonEnum.h:
-
-.././Mode/StandardMode.h:
-
-.././Mode/SetVoltageMode.h:
-
-.././Mode/UnknownMode.h:
-
-.././Mode/OFFMode.h:
-
-.././Mode/SetAmperagedMode.h:
-
-.././Mode/FanMode.h:
 
 ../include/ICoolerMotor.h:
 
-.././Mode/..\CoolerMotor\LinarCoolerMotor.h:
-
-.././Mode/PowerMode.h:
+../Mode/..\CoolerMotor\LinarCoolerMotor.h:

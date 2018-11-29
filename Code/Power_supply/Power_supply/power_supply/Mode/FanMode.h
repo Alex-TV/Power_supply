@@ -15,18 +15,18 @@
 
 #define CoolerMotorPin PD6
 
-class FunMode: public IMode
+class FanMode: public IMode
 {
 	//variables
 	public:
 	protected:
 	private:
-	ICoolerMotor* _funMotor;
+	ICoolerMotor* _fanMotor;
 	int* _temp;
 	//functions
 	public:
-	FunMode(IDisplay*, int*);
-	~FunMode();
+	FanMode(IDisplay*, int*);
+	~FanMode();
 	void IncrementEncoderValue();
 	void DecrementEncoderValue();
 	ModeEnum GetTypeMode();
@@ -40,8 +40,8 @@ class FunMode: public IMode
 	void ReadPWMInEeprom(ButtonEnum);
 	protected:
 	private:
-	FunMode( const FunMode &c );
-	FunMode& operator=( const FunMode &c );
+	FanMode( const FanMode &c );
+	FanMode& operator=( const FanMode &c );
 
 }; //FunMode
 

@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00002f1c  00000000  00000000  00035dcc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000065f8  00000000  00000000  00038ce8  2**0
+ 10 .debug_str    00006600  00000000  00000000  00038ce8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000f0da  00000000  00000000  0003f2e0  2**0
+ 11 .debug_loc    0000f0da  00000000  00000000  0003f2e8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000e10  00000000  00000000  0004e3ba  2**0
+ 12 .debug_ranges 00000e10  00000000  00000000  0004e3c2  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1136,7 +1136,7 @@ void Display16x2::PrintTempAndFunStatus(int temp, int funPower)
      6fa:	82 81       	ldd	r24, Z+2	; 0x02
      6fc:	93 81       	ldd	r25, Z+3	; 0x03
      6fe:	0e 94 39 12 	call	0x2472	; 0x2472 <_ZN17LiquidCrystal_I2C9setCursorEhh>
-	_lcd->print("Fun=");
+	_lcd->print("Fan=");
      702:	65 e7       	ldi	r22, 0x75	; 117
      704:	71 e0       	ldi	r23, 0x01	; 1
      706:	f8 01       	movw	r30, r16
@@ -1728,19 +1728,19 @@ Display16x2::Display16x2()
      b08:	20 83       	st	Z, r18
      b0a:	08 95       	ret
 
-00000b0c <_ZN7FunModeD1Ev>:
-	_funMotor =  new LinarCoolerMotor(CoolerMotorPin);
+00000b0c <_ZN7FanModeD1Ev>:
+	_fanMotor =  new LinarCoolerMotor(CoolerMotorPin);
 	_temp = temp;
 } //FunMode
 
 // default destructor
-FunMode::~FunMode()
+FanMode::~FanMode()
      b0c:	08 95       	ret
 
-00000b0e <_ZN7FunMode11GetTypeModeEv>:
-void FunMode::DecrementEncoderValue(){}
+00000b0e <_ZN7FanMode11GetTypeModeEv>:
+void FanMode::DecrementEncoderValue(){}
 
-ModeEnum FunMode::GetTypeMode()
+ModeEnum FanMode::GetTypeMode()
 {
 	return ModeEnum::FunMode;
 }
@@ -1748,12 +1748,12 @@ ModeEnum FunMode::GetTypeMode()
      b10:	90 e0       	ldi	r25, 0x00	; 0
      b12:	08 95       	ret
 
-00000b14 <_ZN7FunMode10PrintStateEv>:
+00000b14 <_ZN7FanMode10PrintStateEv>:
 
-void FunMode::SaveEEPROM(){}
-void FunMode::ReadEEPROM(){}
+void FanMode::SaveEEPROM(){}
+void FanMode::ReadEEPROM(){}
 
-void FunMode::PrintState(){
+void FanMode::PrintState(){
 	_display->Clear();
      b14:	dc 01       	movw	r26, r24
      b16:	52 96       	adiw	r26, 0x12	; 18
@@ -1768,18 +1768,18 @@ void FunMode::PrintState(){
      b28:	e0 2d       	mov	r30, r0
      b2a:	09 94       	ijmp
 
-00000b2c <_ZN7FunMode10ReadEEPROMEv>:
+00000b2c <_ZN7FanMode10ReadEEPROMEv>:
 }
 
-void FunMode::ReadADC(){}
+void FanMode::ReadADC(){}
      b2c:	08 95       	ret
 
-00000b2e <_ZN7FunMode8WritePWMEv>:
+00000b2e <_ZN7FanMode8WritePWMEv>:
 
-void FunMode::WritePWM(){
+void FanMode::WritePWM(){
      b2e:	cf 93       	push	r28
      b30:	df 93       	push	r29
-	_funMotor->Update(*_temp);
+	_fanMotor->Update(*_temp);
      b32:	ec 01       	movw	r28, r24
      b34:	ac 89       	ldd	r26, Y+20	; 0x14
      b36:	bd 89       	ldd	r27, Y+21	; 0x15
@@ -1799,22 +1799,22 @@ void FunMode::WritePWM(){
      b50:	cf 91       	pop	r28
 }
 
-void FunMode::ReadADC(){}
+void FanMode::ReadADC(){}
 
-void FunMode::WritePWM(){
-	_funMotor->Update(*_temp);
+void FanMode::WritePWM(){
+	_fanMotor->Update(*_temp);
      b52:	09 94       	ijmp
 
-00000b54 <_ZN7FunMode9PrintModeEv>:
+00000b54 <_ZN7FanMode9PrintModeEv>:
 }
 
-void FunMode::PrintMode(){
+void FanMode::PrintMode(){
      b54:	0f 93       	push	r16
      b56:	1f 93       	push	r17
      b58:	cf 93       	push	r28
      b5a:	df 93       	push	r29
      b5c:	ec 01       	movw	r28, r24
-	_display->PrintTempAndFunStatus(*_temp, _funMotor->GetPowerProcent());
+	_display->PrintTempAndFunStatus(*_temp, _fanMotor->GetPowerProcent());
      b5e:	ea 89       	ldd	r30, Y+18	; 0x12
      b60:	fb 89       	ldd	r31, Y+19	; 0x13
      b62:	01 90       	ld	r0, Z+
@@ -1840,7 +1840,7 @@ void FunMode::PrintMode(){
      b8a:	9b 89       	ldd	r25, Y+19	; 0x13
      b8c:	f8 01       	movw	r30, r16
      b8e:	09 95       	icall
-	_display->PrintProgressBar(1, _funMotor->GetPowerProcent());
+	_display->PrintProgressBar(1, _fanMotor->GetPowerProcent());
      b90:	ea 89       	ldd	r30, Y+18	; 0x12
      b92:	fb 89       	ldd	r31, Y+19	; 0x13
      b94:	01 90       	ld	r0, Z+
@@ -1868,36 +1868,36 @@ void FunMode::PrintMode(){
      bbe:	cf 91       	pop	r28
      bc0:	1f 91       	pop	r17
      bc2:	0f 91       	pop	r16
-	_funMotor->Update(*_temp);
+	_fanMotor->Update(*_temp);
 }
 
-void FunMode::PrintMode(){
-	_display->PrintTempAndFunStatus(*_temp, _funMotor->GetPowerProcent());
-	_display->PrintProgressBar(1, _funMotor->GetPowerProcent());
+void FanMode::PrintMode(){
+	_display->PrintTempAndFunStatus(*_temp, _fanMotor->GetPowerProcent());
+	_display->PrintProgressBar(1, _fanMotor->GetPowerProcent());
      bc4:	09 94       	ijmp
 
-00000bc6 <_ZN7FunMode15ReadPWMInEepromE10ButtonEnum>:
+00000bc6 <_ZN7FanMode15ReadPWMInEepromE10ButtonEnum>:
 }
-void FunMode::SavePWMInEeprom(ButtonEnum){}
-void FunMode::ReadPWMInEeprom(ButtonEnum){}
+void FanMode::SavePWMInEeprom(ButtonEnum){}
+void FanMode::ReadPWMInEeprom(ButtonEnum){}
      bc6:	08 95       	ret
 
-00000bc8 <_ZN7FunModeD0Ev>:
+00000bc8 <_ZN7FanModeD0Ev>:
 } //FunMode
 
 // default destructor
-FunMode::~FunMode()
+FanMode::~FanMode()
 {
 } //~FunMode
      bc8:	0c 94 69 1b 	jmp	0x36d2	; 0x36d2 <_ZdlPv>
 
-00000bcc <_ZN7FunModeC1EP8IDisplayPi>:
+00000bcc <_ZN7FanModeC1EP8IDisplayPi>:
 * Author: koval
 */
-#include "FunMode.h"
+#include "FanMode.h"
 
 // default constructor
-FunMode::FunMode(IDisplay* display, int* temp)
+FanMode::FanMode(IDisplay* display, int* temp)
      bcc:	ef 92       	push	r14
      bce:	ff 92       	push	r15
      bd0:	0f 93       	push	r16
@@ -1944,7 +1944,7 @@ class IMode
 	_display = display;
      c14:	7b 8b       	std	Y+19, r23	; 0x13
      c16:	6a 8b       	std	Y+18, r22	; 0x12
-	_funMotor =  new LinarCoolerMotor(CoolerMotorPin);
+	_fanMotor =  new LinarCoolerMotor(CoolerMotorPin);
      c18:	80 e1       	ldi	r24, 0x10	; 16
      c1a:	90 e0       	ldi	r25, 0x00	; 0
      c1c:	0e 94 65 1b 	call	0x36ca	; 0x36ca <_Znwj>
@@ -3927,7 +3927,7 @@ void SavePWMVoltageInEeprom()
     15c8:	08 95       	ret
 
 000015ca <setup>:
-IMode* _funMode;
+IMode* _fanMode;
 IMode* _oldMode;
 IMode* _mode;
 
@@ -4037,7 +4037,7 @@ void setup()
     16ce:	f0 91 9b 02 	lds	r31, 0x029B	; 0x80029b <_modesArray+0x1>
     16d2:	d1 87       	std	Z+9, r29	; 0x09
     16d4:	c0 87       	std	Z+8, r28	; 0x08
-	_funMode = new FunMode(_disply, &_currentTemperature);
+	_fanMode = new FanMode(_disply, &_currentTemperature);
     16d6:	88 e1       	ldi	r24, 0x18	; 24
     16d8:	90 e0       	ldi	r25, 0x00	; 0
     16da:	0e 94 65 1b 	call	0x36ca	; 0x36ca <_Znwj>
@@ -4046,9 +4046,9 @@ void setup()
     16e4:	70 91 9d 02 	lds	r23, 0x029D	; 0x80029d <_disply+0x1>
     16e8:	41 ea       	ldi	r20, 0xA1	; 161
     16ea:	52 e0       	ldi	r21, 0x02	; 2
-    16ec:	0e 94 e6 05 	call	0xbcc	; 0xbcc <_ZN7FunModeC1EP8IDisplayPi>
-    16f0:	d0 93 99 02 	sts	0x0299, r29	; 0x800299 <_funMode+0x1>
-    16f4:	c0 93 98 02 	sts	0x0298, r28	; 0x800298 <_funMode>
+    16ec:	0e 94 e6 05 	call	0xbcc	; 0xbcc <_ZN7FanModeC1EP8IDisplayPi>
+    16f0:	d0 93 99 02 	sts	0x0299, r29	; 0x800299 <_fanMode+0x1>
+    16f4:	c0 93 98 02 	sts	0x0298, r28	; 0x800298 <_fanMode>
 	
 	_oldMode =  _modesArray[0];
     16f8:	e0 91 9a 02 	lds	r30, 0x029A	; 0x80029a <_modesArray>
@@ -4243,9 +4243,9 @@ void setup()
 	{
 		_modesArray[i]->ReadEEPROM();
 	}
-	_funMode->ReadEEPROM();
-    1880:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_funMode>
-    1884:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_funMode+0x1>
+	_fanMode->ReadEEPROM();
+    1880:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_fanMode>
+    1884:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_fanMode+0x1>
     1888:	dc 01       	movw	r26, r24
     188a:	ed 91       	ld	r30, X+
     188c:	fc 91       	ld	r31, X
@@ -4278,7 +4278,7 @@ void setup()
     18c0:	ef 90       	pop	r14
 		_modesArray[i]->ReadEEPROM();
 	}
-	_funMode->ReadEEPROM();
+	_fanMode->ReadEEPROM();
 
 	delay(logoTime);
 	_mode->PrintState();
@@ -4793,9 +4793,9 @@ void RegEncoderButton()
     1baa:	90 93 97 02 	sts	0x0297, r25	; 0x800297 <_oldMode+0x1>
     1bae:	80 93 96 02 	sts	0x0296, r24	; 0x800296 <_oldMode>
 		}
-		_mode = _funMode;
-    1bb2:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_funMode>
-    1bb6:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_funMode+0x1>
+		_mode = _fanMode;
+    1bb2:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_fanMode>
+    1bb6:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_fanMode+0x1>
     1bba:	90 93 95 02 	sts	0x0295, r25	; 0x800295 <__data_end+0x1>
     1bbe:	80 93 94 02 	sts	0x0294, r24	; 0x800294 <__data_end>
     1bc2:	d3 cf       	rjmp	.-90     	; 0x1b6a <_Z16RegEncoderButtonv+0x68>
@@ -5048,9 +5048,9 @@ void loop()
     1d3a:	e0 2d       	mov	r30, r0
     1d3c:	09 95       	icall
 	
-	_funMode->WritePWM();
-    1d3e:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_funMode>
-    1d42:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_funMode+0x1>
+	_fanMode->WritePWM();
+    1d3e:	80 91 98 02 	lds	r24, 0x0298	; 0x800298 <_fanMode>
+    1d42:	90 91 99 02 	lds	r25, 0x0299	; 0x800299 <_fanMode+0x1>
     1d46:	dc 01       	movw	r26, r24
     1d48:	ed 91       	ld	r30, X+
     1d4a:	fc 91       	ld	r31, X

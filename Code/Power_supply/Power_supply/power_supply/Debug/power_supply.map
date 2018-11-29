@@ -183,10 +183,10 @@ Discarded input sections
  .text          0x00000000        0x0 Display/Display16x2.o
  .data          0x00000000        0x0 Display/Display16x2.o
  .bss           0x00000000        0x0 Display/Display16x2.o
- .group         0x00000000        0x8 Mode/FunMode.o
- .text          0x00000000        0x0 Mode/FunMode.o
- .data          0x00000000        0x0 Mode/FunMode.o
- .bss           0x00000000        0x0 Mode/FunMode.o
+ .group         0x00000000        0x8 Mode/FanMode.o
+ .text          0x00000000        0x0 Mode/FanMode.o
+ .data          0x00000000        0x0 Mode/FanMode.o
+ .bss           0x00000000        0x0 Mode/FanMode.o
  .group         0x00000000        0x8 Mode/OFFMode.o
  .text          0x00000000        0x0 Mode/OFFMode.o
  .data          0x00000000        0x0 Mode/OFFMode.o
@@ -1098,7 +1098,7 @@ Address of section .data set to 0x800100
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
 LOAD CoolerMotor/LinarCoolerMotor.o
 LOAD Display/Display16x2.o
-LOAD Mode/FunMode.o
+LOAD Mode/FanMode.o
 LOAD Mode/OFFMode.o
 LOAD Mode/PowerMode.o
 LOAD Mode/SetAmperagedMode.o
@@ -1408,40 +1408,40 @@ END GROUP
                 0x00000b00        0xc Display/Display16x2.o
                 0x00000b00                _ZN11Display16x2C1Ev
                 0x00000b00                _ZN11Display16x2C2Ev
- .text._ZN7FunModeD2Ev
-                0x00000b0c        0x2 Mode/FunMode.o
-                0x00000b0c                _ZN7FunModeD1Ev
-                0x00000b0c                _ZN7FunModeD2Ev
- .text._ZN7FunMode11GetTypeModeEv
-                0x00000b0e        0x6 Mode/FunMode.o
-                0x00000b0e                _ZN7FunMode11GetTypeModeEv
- .text._ZN7FunMode10PrintStateEv
-                0x00000b14       0x18 Mode/FunMode.o
-                0x00000b14                _ZN7FunMode10PrintStateEv
- .text._ZN7FunMode7ReadADCEv
-                0x00000b2c        0x2 Mode/FunMode.o
-                0x00000b2c                _ZN7FunMode7ReadADCEv
-                0x00000b2c                _ZN7FunMode10SaveEEPROMEv
-                0x00000b2c                _ZN7FunMode10ReadEEPROMEv
-                0x00000b2c                _ZN7FunMode21IncrementEncoderValueEv
-                0x00000b2c                _ZN7FunMode21DecrementEncoderValueEv
- .text._ZN7FunMode8WritePWMEv
-                0x00000b2e       0x26 Mode/FunMode.o
-                0x00000b2e                _ZN7FunMode8WritePWMEv
- .text._ZN7FunMode9PrintModeEv
-                0x00000b54       0x72 Mode/FunMode.o
-                0x00000b54                _ZN7FunMode9PrintModeEv
- .text._ZN7FunMode15ReadPWMInEepromE10ButtonEnum
-                0x00000bc6        0x2 Mode/FunMode.o
-                0x00000bc6                _ZN7FunMode15SavePWMInEepromE10ButtonEnum
-                0x00000bc6                _ZN7FunMode15ReadPWMInEepromE10ButtonEnum
- .text._ZN7FunModeD0Ev
-                0x00000bc8        0x4 Mode/FunMode.o
-                0x00000bc8                _ZN7FunModeD0Ev
- .text._ZN7FunModeC2EP8IDisplayPi
-                0x00000bcc       0x74 Mode/FunMode.o
-                0x00000bcc                _ZN7FunModeC2EP8IDisplayPi
-                0x00000bcc                _ZN7FunModeC1EP8IDisplayPi
+ .text._ZN7FanModeD2Ev
+                0x00000b0c        0x2 Mode/FanMode.o
+                0x00000b0c                _ZN7FanModeD2Ev
+                0x00000b0c                _ZN7FanModeD1Ev
+ .text._ZN7FanMode11GetTypeModeEv
+                0x00000b0e        0x6 Mode/FanMode.o
+                0x00000b0e                _ZN7FanMode11GetTypeModeEv
+ .text._ZN7FanMode10PrintStateEv
+                0x00000b14       0x18 Mode/FanMode.o
+                0x00000b14                _ZN7FanMode10PrintStateEv
+ .text._ZN7FanMode7ReadADCEv
+                0x00000b2c        0x2 Mode/FanMode.o
+                0x00000b2c                _ZN7FanMode7ReadADCEv
+                0x00000b2c                _ZN7FanMode10ReadEEPROMEv
+                0x00000b2c                _ZN7FanMode21DecrementEncoderValueEv
+                0x00000b2c                _ZN7FanMode21IncrementEncoderValueEv
+                0x00000b2c                _ZN7FanMode10SaveEEPROMEv
+ .text._ZN7FanMode8WritePWMEv
+                0x00000b2e       0x26 Mode/FanMode.o
+                0x00000b2e                _ZN7FanMode8WritePWMEv
+ .text._ZN7FanMode9PrintModeEv
+                0x00000b54       0x72 Mode/FanMode.o
+                0x00000b54                _ZN7FanMode9PrintModeEv
+ .text._ZN7FanMode15ReadPWMInEepromE10ButtonEnum
+                0x00000bc6        0x2 Mode/FanMode.o
+                0x00000bc6                _ZN7FanMode15ReadPWMInEepromE10ButtonEnum
+                0x00000bc6                _ZN7FanMode15SavePWMInEepromE10ButtonEnum
+ .text._ZN7FanModeD0Ev
+                0x00000bc8        0x4 Mode/FanMode.o
+                0x00000bc8                _ZN7FanModeD0Ev
+ .text._ZN7FanModeC2EP8IDisplayPi
+                0x00000bcc       0x74 Mode/FanMode.o
+                0x00000bcc                _ZN7FanModeC2EP8IDisplayPi
+                0x00000bcc                _ZN7FanModeC1EP8IDisplayPi
  .text._ZN7OFFModeD2Ev
                 0x00000c40        0x2 Mode/OFFMode.o
                 0x00000c40                _ZN7OFFModeD1Ev
@@ -2189,9 +2189,9 @@ END GROUP
  .rodata._ZTV11Display16x2
                 0x0080018c       0x28 Display/Display16x2.o
                 0x0080018c                _ZTV11Display16x2
- .rodata._ZTV7FunMode
-                0x008001b4       0x1e Mode/FunMode.o
-                0x008001b4                _ZTV7FunMode
+ .rodata._ZTV7FanMode
+                0x008001b4       0x1e Mode/FanMode.o
+                0x008001b4                _ZTV7FanMode
  .rodata._ZTV7OFFMode
                 0x008001d2       0x1e Mode/OFFMode.o
                 0x008001d2                _ZTV7OFFMode
@@ -2230,8 +2230,8 @@ END GROUP
                 0x00800294                _mode
  .bss._oldMode  0x00800296        0x2 Sketch.o
                 0x00800296                _oldMode
- .bss._funMode  0x00800298        0x2 Sketch.o
-                0x00800298                _funMode
+ .bss._fanMode  0x00800298        0x2 Sketch.o
+                0x00800298                _fanMode
  .bss._modesArray
                 0x0080029a        0x2 Sketch.o
                 0x0080029a                _modesArray
@@ -2389,7 +2389,7 @@ END GROUP
  .comment       0x00000000       0x30 CoolerMotor/LinarCoolerMotor.o
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 Display/Display16x2.o
- .comment       0x00000030       0x31 Mode/FunMode.o
+ .comment       0x00000030       0x31 Mode/FanMode.o
  .comment       0x00000030       0x31 Mode/OFFMode.o
  .comment       0x00000030       0x31 Mode/PowerMode.o
  .comment       0x00000030       0x31 Mode/SetAmperagedMode.o
@@ -2441,7 +2441,7 @@ END GROUP
  .debug_aranges
                 0x00000048       0xc0 Display/Display16x2.o
  .debug_aranges
-                0x00000108       0x60 Mode/FunMode.o
+                0x00000108       0x60 Mode/FanMode.o
  .debug_aranges
                 0x00000168       0x50 Mode/OFFMode.o
  .debug_aranges
@@ -2497,7 +2497,7 @@ END GROUP
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x623 CoolerMotor/LinarCoolerMotor.o
  .debug_info    0x00000c17     0x2cd9 Display/Display16x2.o
- .debug_info    0x000038f0     0x1eb2 Mode/FunMode.o
+ .debug_info    0x000038f0     0x1eb2 Mode/FanMode.o
  .debug_info    0x000057a2     0x1ceb Mode/OFFMode.o
  .debug_info    0x0000748d     0x1d82 Mode/PowerMode.o
  .debug_info    0x0000920f     0x2871 Mode/SetAmperagedMode.o
@@ -2527,7 +2527,7 @@ END GROUP
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x2d9 CoolerMotor/LinarCoolerMotor.o
  .debug_abbrev  0x0000087b      0x4a7 Display/Display16x2.o
- .debug_abbrev  0x00000d22      0x43f Mode/FunMode.o
+ .debug_abbrev  0x00000d22      0x43f Mode/FanMode.o
  .debug_abbrev  0x00001161      0x3be Mode/OFFMode.o
  .debug_abbrev  0x0000151f      0x3d0 Mode/PowerMode.o
  .debug_abbrev  0x000018ef      0x4eb Mode/SetAmperagedMode.o
@@ -2557,7 +2557,7 @@ END GROUP
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x223 CoolerMotor/LinarCoolerMotor.o
  .debug_line    0x00000356      0x726 Display/Display16x2.o
- .debug_line    0x00000a7c      0x289 Mode/FunMode.o
+ .debug_line    0x00000a7c      0x289 Mode/FanMode.o
  .debug_line    0x00000d05      0x21b Mode/OFFMode.o
  .debug_line    0x00000f20      0x247 Mode/PowerMode.o
  .debug_line    0x00001167      0x485 Mode/SetAmperagedMode.o
@@ -2586,7 +2586,7 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x00000000       0x8c CoolerMotor/LinarCoolerMotor.o
  .debug_frame   0x0000008c      0x370 Display/Display16x2.o
- .debug_frame   0x000003fc       0xe4 Mode/FunMode.o
+ .debug_frame   0x000003fc       0xe4 Mode/FanMode.o
  .debug_frame   0x000004e0       0x90 Mode/OFFMode.o
  .debug_frame   0x00000570       0xa4 Mode/PowerMode.o
  .debug_frame   0x00000614      0x1c4 Mode/SetAmperagedMode.o
@@ -2609,63 +2609,63 @@ END GROUP
  .debug_frame   0x00002498      0xa60 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
  .debug_frame   0x00002ef8       0x24 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
 
-.debug_str      0x00000000     0x65f8
+.debug_str      0x00000000     0x6600
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x50e CoolerMotor/LinarCoolerMotor.o
                                 0x57b (size before relaxing)
- .debug_str     0x00000716     0x132b Display/Display16x2.o
+ .debug_str     0x00000716     0x1333 Display/Display16x2.o
                                0x165d (size before relaxing)
- .debug_str     0x00001a41      0x516 Mode/FunMode.o
-                               0x1760 (size before relaxing)
- .debug_str     0x00001f57      0x1f8 Mode/OFFMode.o
+ .debug_str     0x00001a49      0x516 Mode/FanMode.o
+                               0x1768 (size before relaxing)
+ .debug_str     0x00001f5f      0x1f8 Mode/OFFMode.o
                                0x1679 (size before relaxing)
- .debug_str     0x0000214f      0x249 Mode/PowerMode.o
+ .debug_str     0x00002157      0x249 Mode/PowerMode.o
                                0x16dc (size before relaxing)
- .debug_str     0x00002398      0x670 Mode/SetAmperagedMode.o
+ .debug_str     0x000023a0      0x670 Mode/SetAmperagedMode.o
                                0x1b68 (size before relaxing)
- .debug_str     0x00002a08      0x2b3 Mode/SetVoltageMode.o
+ .debug_str     0x00002a10      0x2b3 Mode/SetVoltageMode.o
                                0x1afc (size before relaxing)
- .debug_str     0x00002cbb      0x267 Mode/StandardMode.o
+ .debug_str     0x00002cc3      0x267 Mode/StandardMode.o
                                0x16ed (size before relaxing)
- .debug_str     0x00002f22     0x1603 Sketch.o
+ .debug_str     0x00002f2a     0x1603 Sketch.o
                                0x2e30 (size before relaxing)
- .debug_str     0x00004525      0x154 src/libraries/DallasTemperature/DallasTemperature.o
+ .debug_str     0x0000452d      0x154 src/libraries/DallasTemperature/DallasTemperature.o
                                0x132b (size before relaxing)
- .debug_str     0x00004679      0x8a4 src/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.o
+ .debug_str     0x00004681      0x8a4 src/libraries/LiquidCrystal_I2C/src/LiquidCrystal_I2C.o
                                 0xc0d (size before relaxing)
- .debug_str     0x00004f1d      0x14d src/libraries/OneWire/src/OneWire.o
+ .debug_str     0x00004f25      0x14d src/libraries/OneWire/src/OneWire.o
                                 0x678 (size before relaxing)
- .debug_str     0x0000506a       0x74 src/libraries/SimpleTimer/SimpleTimer.o
+ .debug_str     0x00005072       0x74 src/libraries/SimpleTimer/SimpleTimer.o
                                 0x5d1 (size before relaxing)
- .debug_str     0x000050de      0x2bb src/libraries/Wire/src/utility/twi.o
+ .debug_str     0x000050e6      0x2bb src/libraries/Wire/src/utility/twi.o
                                 0x3c7 (size before relaxing)
- .debug_str     0x00005399      0x8dc src/libraries/Wire/src/Wire.o
+ .debug_str     0x000053a1      0x8dc src/libraries/Wire/src/Wire.o
                                0x18be (size before relaxing)
- .debug_str     0x00005c75       0xa7 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(main.o)
+ .debug_str     0x00005c7d       0xa7 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(main.o)
                                 0x2ac (size before relaxing)
- .debug_str     0x00005d1c       0x3a R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(new.o)
+ .debug_str     0x00005d24       0x3a R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(new.o)
                                 0x1c2 (size before relaxing)
- .debug_str     0x00005d56      0x353 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(Print.o)
+ .debug_str     0x00005d5e      0x353 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(Print.o)
                                0x123a (size before relaxing)
- .debug_str     0x000060a9       0x72 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WInterrupts.o)
+ .debug_str     0x000060b1       0x72 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WInterrupts.o)
                                 0x22f (size before relaxing)
- .debug_str     0x0000611b       0x6d R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
+ .debug_str     0x00006123       0x6d R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring.o)
                                 0x242 (size before relaxing)
- .debug_str     0x00006188       0x5b R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
+ .debug_str     0x00006190       0x5b R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_analog.o)
                                 0x246 (size before relaxing)
- .debug_str     0x000061e3       0x51 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
+ .debug_str     0x000061eb       0x51 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(wiring_digital.o)
                                 0x2a7 (size before relaxing)
- .debug_str     0x00006234      0x3a8 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
+ .debug_str     0x0000623c      0x3a8 R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(WString.o)
                                0x118d (size before relaxing)
- .debug_str     0x000065dc       0x1c R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
+ .debug_str     0x000065e4       0x1c R:\AVR\arduino\Power_supply\Code\Power_supply\Power_supply\ArduinoCore\Debug\libArduinoCore.a(hooks.o)
                                 0x137 (size before relaxing)
 
 .debug_loc      0x00000000     0xf0da
  *(.debug_loc)
  .debug_loc     0x00000000      0x18c CoolerMotor/LinarCoolerMotor.o
  .debug_loc     0x0000018c     0x10ab Display/Display16x2.o
- .debug_loc     0x00001237      0x284 Mode/FunMode.o
+ .debug_loc     0x00001237      0x284 Mode/FanMode.o
  .debug_loc     0x000014bb      0x101 Mode/OFFMode.o
  .debug_loc     0x000015bc      0x13a Mode/PowerMode.o
  .debug_loc     0x000016f6      0x74a Mode/SetAmperagedMode.o
@@ -2708,7 +2708,7 @@ END GROUP
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x38 CoolerMotor/LinarCoolerMotor.o
  .debug_ranges  0x00000038       0xb0 Display/Display16x2.o
- .debug_ranges  0x000000e8       0x50 Mode/FunMode.o
+ .debug_ranges  0x000000e8       0x50 Mode/FanMode.o
  .debug_ranges  0x00000138       0x40 Mode/OFFMode.o
  .debug_ranges  0x00000178       0x40 Mode/PowerMode.o
  .debug_ranges  0x000001b8       0x78 Mode/SetAmperagedMode.o

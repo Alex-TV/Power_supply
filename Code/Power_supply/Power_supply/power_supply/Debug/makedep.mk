@@ -6,7 +6,7 @@ CoolerMotor\LinarCoolerMotor.cpp
 
 Display\Display16x2.cpp
 
-Mode\FunMode.cpp
+Mode\FanMode.cpp
 
 Mode\OFFMode.cpp
 
