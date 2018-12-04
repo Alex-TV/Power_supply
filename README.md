@@ -1,5 +1,4 @@
 # Power_supply
-Плата управления ATX БП
-Часть 1 :https://youtu.be/1dYKl7bsM8o
-Часть 2 : https://youtu.be/uQOuWpuCpl4
-Часть 5: https://youtu.be/Qr2rPdX7F0g
+Плата управления ATX 
+Часть 1 :
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1dYKl7bsM8o?start=5" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
